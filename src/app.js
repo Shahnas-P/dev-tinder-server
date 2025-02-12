@@ -1,28 +1,24 @@
 const express = require('express')
-
+const {connectDB}=require('./config/database')
 const app = express()
 
 
-app.use('/user',(req,res)=>{
-   
-        throw new Error()
-        res.send(
-            "Data fetched successfully!!"
-        )
-  
-   
-
-})
-
-app.use('/',(err,req,res,next)=>{
-    if(err){
-        res.status(500).send("Some Error : Contact Support team")
-    }
-})
 
 
 
-app.listen(3000 ,()=>{
-    console.log("Server running at port : 3000 ");
+
+
+connectDB().then(()=>{
+    console.log("Database Connected Successfully !!!");
+    app.listen(3000 ,()=>{
+        console.log("Server running at port : 3000 ");
+        
+    })
+    
+}).catch((error)=>{
+    console.log("Error:Something went wrong!!");
     
 })
+
+
+
